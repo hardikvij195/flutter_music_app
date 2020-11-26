@@ -19,6 +19,10 @@ void main() {
           BlocProvider(
               create: (context) => ParticularTrack_Bloc(repository: TrackRepositoryImpl() , Trackid: ""),
           ),
+          BlocProvider(
+            create: (context) => FavTrack_Bloc(repository: TrackRepositoryImpl() ),
+          ),
+
         ],
         child: Home_Page(),
       ),

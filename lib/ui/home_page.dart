@@ -90,18 +90,22 @@ class _Home_PageState extends State<Home_Page> {
             icon: Icon(Icons.favorite , color: Colors.black,),
             onPressed: () {
 
-              Navigator.push(context, MaterialPageRoute(
-                builder:(context) => Fav_Page()));
+              // Navigator.push(context, MaterialPageRoute(
+              //   builder:(context) => Fav_Page()));
 
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => BlocProvider(create: (context) => FavTrack_Bloc(repository: TrackRepositoryImpl() ),
+                    child: Fav_Page(),)
+              ));
 
             },
           ),
-          // IconButton(
-          //   icon: Icon(Icons.refresh , color: Colors.black,),
-          //   onPressed: () {
-          //     track_bloc.add(FetchTrackEvent());
-          //   },
-          // ),
+          IconButton(
+            icon: Icon(Icons.refresh , color: Colors.black,),
+            onPressed: () {
+              track_bloc.add(FetchTrackEvent());
+            },
+          ),
         ],
       ),
 

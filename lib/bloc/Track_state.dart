@@ -37,6 +37,16 @@ class ParticularTrackLoadedState extends TrackState {
   List<Object> get props => [track , lyrics];
 }
 
+class FavTrackLoadedState extends TrackState {
+
+  List<SavedTrack> tracks;
+  FavTrackLoadedState({@required this.tracks });
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [tracks];
+}
+
 class TrackErrorState extends TrackState {
 
   String message;

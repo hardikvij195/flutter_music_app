@@ -5,14 +5,18 @@ import 'package:flutter_music_app/res/Res.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 abstract class TrackRepository {
   Future<List<TrackModel>> getTracks();
   Future<TrackModel> getParticularTrackInfo(String id);
   Future<String> getParticularTrackLyrics(String id);
+  Future<List<SavedTrack>> getStringValuesSF(String id);
 
 }
 
 class TrackRepositoryImpl implements TrackRepository {
+
 
   @override
   Future<List<TrackModel>> getTracks() async {
@@ -59,6 +63,23 @@ class TrackRepositoryImpl implements TrackRepository {
       //print(response.body);
       throw Exception();
     }
+  }
+
+  @override
+  Future<List<SavedTrack>> getStringValuesSF(String id) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String stringValue = prefs.getString(id) ?? '';
+    if(stringValue != ''){
+
+      List<SavedTrack> favlist = SavedTrack.decodeTasks(stringValue);
+      print("Track -- " + favlist.toString());
+
+      return favlist;
+    }else{
+      throw Exception();
+    }
+
   }
 
 

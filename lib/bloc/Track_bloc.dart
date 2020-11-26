@@ -20,7 +20,6 @@ class Track_Bloc extends Bloc<TrackEvent, TrackState> {
       yield TrackLoadingState();
       try {
         List<TrackModel> tracks = await repository.getTracks();
-
         yield TrackLoadedState(tracks: tracks);
       } catch (e) {
         yield TrackErrorState(message: e.toString());
@@ -51,6 +50,31 @@ class ParticularTrack_Bloc extends Bloc<TrackEvent, TrackState> {
         print(Lyrics);
         //print("Track Id ---" + this.Trackid);
         yield ParticularTrackLoadedState(track: track , lyrics: Lyrics);
+      } catch (e) {
+        yield TrackErrorState(message: e.toString());
+      }
+    }
+  }
+
+}
+
+
+class FavTrack_Bloc extends Bloc<TrackEvent, TrackState> {
+
+  TrackRepository repository;
+  FavTrack_Bloc({@required this.repository }) : super(null);
+
+  @override
+  // TODO: implement initialState
+  TrackState get initialState => TrackInitialState();
+
+  @override
+  Stream<TrackState> mapEventToState(TrackEvent event) async* {
+    if (event is FetchTrackEvent) {
+      yield TrackLoadingState();
+      try {
+        List<SavedTrack> tracks = await repository.getStringValuesSF("tracks");
+        yield FavTrackLoadedState(tracks: tracks);
       } catch (e) {
         yield TrackErrorState(message: e.toString());
       }
