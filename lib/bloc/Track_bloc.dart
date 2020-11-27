@@ -76,7 +76,7 @@ class FavTrack_Bloc extends Bloc<TrackEvent, TrackState> {
         List<SavedTrack> tracks = await repository.getStringValuesSF("tracks");
         yield FavTrackLoadedState(tracks: tracks);
       } catch (e) {
-        yield TrackErrorState(message: e.toString());
+        yield TrackErrorState(message: "No Track Found");
       }
     }
   }
