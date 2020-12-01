@@ -121,11 +121,11 @@ class _Fav_PageState extends State<Fav_Page> {
 
               Spacer(),
 
+
               Container(
                   height: 50,
-                  width: 100,
-                  child: Text(tracks[pos].album_name.toString() , style: TextStyle(fontSize: 14 , color: Colors.black), )),
-
+                  width: 80,
+                  child: Text(tracks[pos].album_name.toString() , style: TextStyle(fontSize: 10 , color: Colors.black), maxLines: 5,overflow: TextOverflow.ellipsis )),
             ],
           ),
         );
